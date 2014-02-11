@@ -12,12 +12,12 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'app',
-        dist: 'build',
-        name: "angular-d3"
+        dist: 'dist',
+        name: 'angular-d3'
     };
 
     try {
-        yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+        yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
     } catch (e) {
     }
 
@@ -79,10 +79,15 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            js: ['<%= yeoman.dist %>/{,*/}*.js'],
+            js: '<%= yeoman.dist %>/{,*/}*.js',
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
-                dirs: ['<%= yeoman.dist %>']
+                dirs: ['<%= yeoman.dist %>'],
+                patterns: {
+                    js: [
+                        [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images']
+                    ]
+                }
             }
         },
         cdnify: {
@@ -120,7 +125,7 @@ module.exports = function (grunt) {
                         cwd: '<%= yeoman.app %>',
                         dest: '<%= yeoman.dist %>',
                         src: [
-                            '*.{txt}'
+                            '**'
                         ]
                     }
                 ]
@@ -130,7 +135,7 @@ module.exports = function (grunt) {
 
     grunt.renameTask('regarde', 'watch');
     // remove when mincss task is renamed
-    grunt.renameTask('mincss', 'cssmin');
+//    grunt.renameTask('mincss', 'cssmin');
 
     grunt.registerTask('server', [
         'clean:server',
@@ -153,10 +158,11 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concat',
         'copy',
+        'uglify',
         'cdnify',
         'usemin',
         'ngmin'
-        //'uglify'
+
     ]);
 
     grunt.registerTask('default', ['build']);

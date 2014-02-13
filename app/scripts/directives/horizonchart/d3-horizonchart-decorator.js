@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('d3')
-  .config( ['$provide', function ($provide) {
+angular.module('d3').config( ['$provide', function ($provide) {
 
         var d3HorizonChartDecorator = function($delegate){
 
@@ -206,5 +205,5 @@ angular.module('d3')
         };
 
 
-        $provide.decorator('d3', d3HorizonChartDecorator);
+        $provide.decorator('d3', ['$delegate', d3HorizonChartDecorator]);
   }]);

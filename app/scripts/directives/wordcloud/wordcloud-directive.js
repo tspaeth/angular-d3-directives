@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('d3')
-  .directive('wordcloud', ['d3',function (d3) {
+  .directive('wordcloud', ['d3', function (d3) {
     return {
       restrict: 'E',
         scope:{

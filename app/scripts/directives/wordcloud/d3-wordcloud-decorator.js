@@ -1,9 +1,7 @@
 'use strict';
 
-angular.module('d3')
-  .config( ['$provide', function ($provide) {
-
-        var d3WorldCloudDecorator = function($delegate){
+angular.module('d3').config( ['$provide', function ($provide) {
+$provide.decorator('d3', ['$delegate', function($delegate){
 
             // Word cloud layout by Jason Davies, http://www.jasondavies.com/word-cloud/
             // Algorithm due to Jonathan Feinberg, http://static.mrfeinberg.com/bv_ch03.pdf
@@ -428,7 +426,7 @@ angular.module('d3')
             })(typeof exports === "undefined" ? d3.layout || (d3.layout = {}) : exports);
 
             return d3;
-        };
+        }]);
 
-        $provide.decorator('d3', d3WorldCloudDecorator);
+        
   }]);
